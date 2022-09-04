@@ -1,0 +1,44 @@
+==259536== Memcheck, a memory error detector
+==259536== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==259536== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==259536== Command: ./test
+==259536== 
+==259536== Syscall param write(buf) points to uninitialised byte(s)
+==259536==    at 0x495CF6F: __libc_write (write.c:26)
+==259536==    by 0x495CF6F: write (write.c:24)
+==259536==    by 0x48EE664: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1181)
+==259536==    by 0x48ED9D5: new_do_write (fileops.c:449)
+==259536==    by 0x48EF708: _IO_new_do_write (fileops.c:426)
+==259536==    by 0x48EF708: _IO_do_write@@GLIBC_2.2.5 (fileops.c:423)
+==259536==    by 0x48EEFEF: _IO_file_close_it@@GLIBC_2.2.5 (fileops.c:136)
+==259536==    by 0x48E2375: fclose@@GLIBC_2.2.5 (iofclose.c:53)
+==259536==    by 0x109482: list_to_bowler (in /home/cguser25/ProjectBowlingGame/CUT/Code/SRC/test)
+==259536==    by 0x10AF3A: main (in /home/cguser25/ProjectBowlingGame/CUT/Code/SRC/test)
+==259536==  Address 0x4a399ea is 170 bytes inside a block of size 4,096 alloc'd
+==259536==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==259536==    by 0x48E213B: _IO_file_doallocate (filedoalloc.c:101)
+==259536==    by 0x48F0A4F: _IO_doallocbuf (genops.c:347)
+==259536==    by 0x48F0A4F: _IO_doallocbuf (genops.c:342)
+==259536==    by 0x48EFBF7: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+==259536==    by 0x48EECDD: _IO_new_file_xsputn (fileops.c:1244)
+==259536==    by 0x48EECDD: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+==259536==    by 0x48E35BC: fwrite (iofwrite.c:39)
+==259536==    by 0x109463: list_to_bowler (in /home/cguser25/ProjectBowlingGame/CUT/Code/SRC/test)
+==259536==    by 0x10AF3A: main (in /home/cguser25/ProjectBowlingGame/CUT/Code/SRC/test)
+==259536== 
+==259536== 
+==259536== HEAP SUMMARY:
+==259536==     in use at exit: 952 bytes in 13 blocks
+==259536==   total heap usage: 26 allocs, 13 frees, 21,696 bytes allocated
+==259536== 
+==259536== LEAK SUMMARY:
+==259536==    definitely lost: 0 bytes in 0 blocks
+==259536==    indirectly lost: 0 bytes in 0 blocks
+==259536==      possibly lost: 0 bytes in 0 blocks
+==259536==    still reachable: 952 bytes in 13 blocks
+==259536==         suppressed: 0 bytes in 0 blocks
+==259536== Rerun with --leak-check=full to see details of leaked memory
+==259536== 
+==259536== Use --track-origins=yes to see where uninitialised values come from
+==259536== For lists of detected and suppressed errors, rerun with: -s
+==259536== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

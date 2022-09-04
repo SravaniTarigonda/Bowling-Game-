@@ -1,0 +1,35 @@
+==238645== Memcheck, a memory error detector
+==238645== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==238645== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==238645== Command: ./a.out
+==238645== 
+==238645== 
+==238645== Process terminating with default action of signal 2 (SIGINT)
+==238645==    at 0x495CE8E: read (read.c:26)
+==238645==    by 0x48EF899: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:517)
+==238645==    by 0x48F0B01: _IO_default_uflow (genops.c:362)
+==238645==    by 0x48C7137: __vfscanf_internal (vfscanf-internal.c:627)
+==238645==    by 0x48C618D: __isoc99_scanf (isoc99_scanf.c:30)
+==238645==    by 0x10ABBB: main (in /home/cguser25/ProjectBowlingGame/CUT/Code/SRC/a.out)
+-------The Bowling Game Begins---------
+1. Maintain Bowler Database
+2.Play the game
+3.Show Report
+4.Exit
+Enter Your Choice: 
+==238645== 
+==238645== HEAP SUMMARY:
+==238645==     in use at exit: 488 bytes in 9 blocks
+==238645==   total heap usage: 17 allocs, 8 frees, 14,888 bytes allocated
+==238645== 
+==238645== LEAK SUMMARY:
+==238645==    definitely lost: 0 bytes in 0 blocks
+==238645==    indirectly lost: 0 bytes in 0 blocks
+==238645==      possibly lost: 0 bytes in 0 blocks
+==238645==    still reachable: 488 bytes in 9 blocks
+==238645==         suppressed: 0 bytes in 0 blocks
+==238645== Reachable blocks (those to which a pointer was found) are not shown.
+==238645== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==238645== 
+==238645== For lists of detected and suppressed errors, rerun with: -s
+==238645== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

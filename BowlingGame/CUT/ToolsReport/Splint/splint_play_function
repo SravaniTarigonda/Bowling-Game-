@@ -1,0 +1,23 @@
+play_the_game_function.c: (in function play_the_game_function)
+play_the_game_function.c:268:5: Implicitly only storage new1->next (type struct
+    bowling_database *) not released before assignment: new1->next = start1
+  A memory leak has been detected. Only-qualified storage is not released
+  before the last reference to it is lost. (Use -mustfreeonly to inhibit
+  warning)
+play_the_game_function.c:268:5: Unqualified storage start1 assigned to
+                                   implicitly only: new1->next = start1
+  Unqualified storage is transferred in an inconsistent way. (Use
+  -unqualifiedtrans to inhibit warning)
+play_the_game_function.c:282:3: Clauses exit with new1 referencing fresh
+    storage in true branch, kept storage in false branch
+  The state of a variable is different depending on which branch is taken. This
+  means no annotation can sensibly be applied to the storage. (Use -branchstate
+  to inhibit warning)
+   play_the_game_function.c:276:5: Storage new1 becomes kept
+   play_the_game_function.c:220:15: Fresh storage new1 created
+play_the_game_function.c:286:11: Function returns with global start1
+                                    referencing kept storage
+  A global variable does not satisfy its annotations when control is
+  transferred. (Use -globstate to inhibit warning)
+   play_the_game_function.c:277:5: Storage start1 becomes kept
+

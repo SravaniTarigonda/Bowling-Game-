@@ -1,0 +1,221 @@
+        -:    0:Source:show_report.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:/*********************************************************
+        -:    2: * * FILENAME: show_report.c
+        -:    3: *
+        -:    4: * * DESCRIPTION: This file defines the function that would be used by the program to 
+        -:    5: * 		  generate various reports about the Bowler & Bowling details using the database.
+        -:    6: *
+        -:    7: *
+        -:    8: * Revision History:
+        -:    9: * 
+        -:   10: *	 Date 				NAME 					Reason
+        -:   11: *
+        -:   12: * 25th Aug 2022        	Shyam Goli and Chandan Kashyap		         ---
+        -:   13: *
+        -:   14: *    
+        -:   15: ********************************************************/
+        -:   16:
+        -:   17:
+        -:   18:#include<stdio.h>
+        -:   19:#include<stdlib.h>
+        -:   20:#include<string.h>
+        -:   21:#include "structure.h"
+        -:   22:
+        -:   23:
+        -:   24:
+        -:   25:/********************************************************
+        -:   26: *FUNCTION NAME  : Bowler_data_sheet
+        -:   27: *
+        -:   28: *DESCRIPTION   :  This function takes the user id as an input from the user and displays the
+        -:   29:                   details of the user present inside the database.
+        -:   30: *
+        -:   31: *
+        -:   32: *RETURNS   :      ID - returns id of the player
+        -:   33: *		   NAME - returns name of the player	           
+        -:   34: *		   EXPERIENCE - returns the experience of the player
+        -:   35: * 	 	   NO OF TOURNAMENTS WON - returns the total number of tournaments won by the player
+        -:   36: * 		   FRAME NUMBER - returns the frame number of the game
+        -:   37: * 		   BALL - returns the current ball of the frame
+        -:   38: *                 FRAME SCORE -  returns the score of current frame
+        -:   39: *                 TOTAL SCORE -  returns the total score of the tournament
+        -:   40: *
+        -:   41: *
+        -:   42: *******************************************************/
+        -:   43:
+        -:   44:
+function Bowler_data_sheet called 1 returned 100% blocks executed 78%
+        1:   45:int Bowler_data_sheet()
+        -:   46:{
+        -:   47:  bd *ptr; 	
+        -:   48:  int bowler_id;	
+        1:   49:  printf("Enter the bowler id:\n");
+call    0 returned 1
+        1:   50:  scanf("%d",&bowler_id); 
+call    0 returned 1
+        -:   51: 
+        1:   52:  if(!start)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   53:  {
+    #####:   54:    printf("Database is empty\n");
+call    0 never executed
+    #####:   55:    return(0);
+        -:   56:  }
+        -:   57:  else
+        -:   58:  {
+        8:   59:    for(ptr=start; (ptr) && ptr->bowler_id != bowler_id; ptr=ptr->next);
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+branch  2 taken 7
+branch  3 taken 1 (fallthrough)
+        1:   60:    if(ptr == NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   61:    {
+    #####:   62:       printf("%d bowler id not found",bowler_id);
+call    0 never executed
+    #####:   63:       return(0);
+        -:   64:    }
+        1:   65:    printf("bowler id : %d\nbowler_name : %s\nbowler_experience : %d\nno_of_tournaments_won : %d\n",ptr->bowler_id,ptr->bowler_name,ptr->bowler_experience,ptr->no_of_tournaments_won);
+call    0 returned 1
+        -:   66:  }
+        -:   67:  
+        -:   68: 
+        -:   69:  bd1 *ptr1;
+        1:   70:  if(!start1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   71:  {
+    #####:   72:    printf("Database is empty\n");
+call    0 never executed
+        -:   73:  }
+        -:   74:  else
+        -:   75:  {
+        3:   76:    for(ptr1=start1; (ptr1) && ptr1->bowler_id != bowler_id; ptr1=ptr1->next);
+branch  0 taken 3 (fallthrough)
+branch  1 taken 0
+branch  2 taken 2
+branch  3 taken 1 (fallthrough)
+        1:   77:    if(ptr1 == NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   78:    {
+    #####:   79:       printf("\nbowler id %d not played any tournament.\n",bowler_id);
+call    0 never executed
+    #####:   80:       printf("\n******************************************************************************************\n");
+call    0 never executed
+    #####:   81:       return(0);
+        -:   82:
+        -:   83:    }
+        1:   84:    printf("****************************** Scores of recently played tournament ***************************\n");
+call    0 returned 1
+        -:   85:
+        1:   86:    printf("Total_strikes : %d\nTotal_spares : %d\ntotal score : %d\n",ptr1->no_of_strikes,ptr1->no_of_spares,ptr1->total_score);
+call    0 returned 1
+        1:   87:    printf("Scores for each frame : [ ");
+call    0 returned 1
+       10:   88:    for(int i = 0; i< 9; i++)
+branch  0 taken 9
+branch  1 taken 1 (fallthrough)
+        -:   89:    {
+        9:   90:      printf("%d, ",ptr1->frame_and_cumulative_score[0][i]);
+call    0 returned 9
+        -:   91:    }
+        1:   92:    printf("%d ]\n",ptr1->frame_and_cumulative_score[0][9]);
+call    0 returned 1
+        -:   93:
+        1:   94:     printf("Cumulative Score : [ ");
+call    0 returned 1
+       10:   95:    for(int i = 0; i< 9; i++)
+branch  0 taken 9
+branch  1 taken 1 (fallthrough)
+        -:   96:    {
+        9:   97:      printf("%d, ",ptr1->frame_and_cumulative_score[1][i]);
+call    0 returned 9
+        -:   98:    }
+        1:   99:    printf("%d ]\n",ptr1->frame_and_cumulative_score[1][9]);
+call    0 returned 1
+        1:  100:    printf("\n\n**********************************************************************************************\n");
+call    0 returned 1
+        -:  101:  }
+        -:  102:  
+        1:  103:}
+        -:  104:
+        -:  105:
+        -:  106:/********************************************************
+        -:  107: *FUNCTION NAME  : Bowling_day_report
+        -:  108: *
+        -:  109: *DESCRIPTION   :  This function displays the overall details of the tournament 
+        -:  110:                   including all players playing on that day.
+        -:  111: *
+        -:  112: *
+        -:  113: *RETURNS   :      ID - returns id of the player
+        -:  114: * 		   FRAME NUMBER - returns the frame number of the game
+        -:  115: * 		   BALL - returns the current ball of the frame
+        -:  116: *                 FRAME SCORE -  returns the score of current frame
+        -:  117: *                 TOTAL SCORE -  returns the total score of the tournament
+        -:  118: *
+        -:  119: *
+        -:  120: *******************************************************/
+        -:  121:
+        -:  122:
+function Bowling_day_report called 1 returned 100% blocks executed 95%
+        1:  123:int Bowling_day_report()
+        -:  124:{
+        -:  125:        bd1 *ptr1;
+        1:  126:	if(!start1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  127:	{
+    #####:  128:		printf("Database is empty\n");
+call    0 never executed
+        -:  129:	}
+        -:  130:	else
+        -:  131:	{
+        1:  132:                system("clear");
+call    0 returned 1
+        1:  133:		printf("**********************************************************************************\n");
+call    0 returned 1
+        1:  134:		printf("*************************************   Bowling day report   *********************\n ");
+call    0 returned 1
+        1:  135:		printf("**********************************************************************************\n");
+call    0 returned 1
+        1:  136:		printf(" Bowler id \t Total Strikes \t Total Spares \t Total Score \t Scores for each frame \n");
+call    0 returned 1
+        5:  137:		for(ptr1=start1; (ptr1); ptr1=ptr1->next)
+branch  0 taken 4
+branch  1 taken 1 (fallthrough)
+        -:  138:		{     	 
+        4:  139:			printf("%11d %14d %13d %12d   [",ptr1->bowler_id,ptr1->no_of_strikes,ptr1->no_of_spares,ptr1->total_score);
+call    0 returned 4
+       40:  140:			for(int i = 0; i< 9; i++)
+branch  0 taken 36
+branch  1 taken 4 (fallthrough)
+        -:  141:			{
+       36:  142:				printf("%d, ",ptr1->frame_and_cumulative_score[0][i]);
+call    0 returned 36
+        -:  143:			}
+        4:  144:			printf("%d ]\n",ptr1->frame_and_cumulative_score[0][9]);
+call    0 returned 4
+        -:  145:
+        -:  146:		}
+        1:  147:		printf("***********************************************************************************\n");
+call    0 returned 1
+        1:  148:		system("read n");
+call    0 returned 1
+        1:  149:		system("clear");
+call    0 returned 1
+        -:  150:	}
+        -:  151:
+        -:  152:
+        1:  153:}
+        -:  154:
+        -:  155:
+        -:  156:
+        -:  157:
+        -:  158:
+        -:  159:
+        -:  160:

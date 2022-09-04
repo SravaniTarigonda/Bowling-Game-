@@ -1,0 +1,34 @@
+OBJS= main.o 
+CO = gcc -o
+CC = gcc -c
+H = structure.h
+MDF = maintain_database_function.c
+PGF = play_the_game_function.c
+SR = show_report.c
+BR = bowler_file_handling.c
+BL = bowling_file_handling.c
+RM = rm *.o
+
+test: $(OBJS)
+	$(CO) test -lpthread
+
+main.o : main.c 
+	$(CC) main.c
+
+#maintain_database_function.o : $(MDF) 
+#	$(CC) $(MDF)
+
+#play_the_game_function.o : $(PGF) 
+#	$(CC) $(PGF)
+#
+show_report.o : $(SR)
+	$(CC) $(SR)
+
+bowler_file_handling.o : $(BR)
+	$(CC) $(BR)
+
+bowling_file_handling.o : $(BL) 
+	$(CC) $(BL)
+
+clean:
+	$(RM)

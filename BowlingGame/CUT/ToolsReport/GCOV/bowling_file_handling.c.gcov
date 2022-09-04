@@ -1,0 +1,122 @@
+        -:    0:Source:bowling_file_handling.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:/********************************************
+        -:    2: * *FILENAME	      : Bowling_file_handling.c
+        -:    3: *
+        -:    4: * *DESCRITION        : This file defines the functions opens the file and return address
+        -:    5: * 			of file and stored in file type pointer.
+        -:    6: *
+        -:    7: *
+        -:    8: * Revision History   :	       
+        -:    9: *
+        -:   10: * 	Date			Name			Reason
+        -:   11: *
+        -:   12: * 27th Aug 2022		----			-----
+        -:   13: *
+        -:   14: *
+        -:   15:*********************************************/
+        -:   16:
+        -:   17:#include "structure.h" 
+        -:   18:#include <stdio.h>
+        -:   19:#include <stdlib.h>
+        -:   20:
+        -:   21:/********************************************
+        -:   22: * *FUNCTION NAME : bowling_to_list 
+        -:   23: *
+        -:   24: * *DESCRIPTION   : This function allocate memory for the bowling to open and read the file 
+        -:   25: * 		    from beginning till end of file and put each bowling data into the list.
+        -:   26: *
+        -:   27: * *RETURNS       : 
+        -:   28: *
+        -:   29: *
+        -:   30: *
+        -:   31:*********************************************/
+        -:   32:
+        -:   33:
+function bowling_to_list called 1 returned 100% blocks executed 87%
+        1:   34:int bowling_to_list()
+        -:   35:{
+        -:   36:	FILE *fp1;
+        1:   37:        if((fp1=fopen("bowling","rb"))==NULL)
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+        -:   38:	{
+    #####:   39:		printf("Can't open bowling file\n");
+call    0 never executed
+    #####:   40:		return(0);
+        -:   41:	}
+        -:   42:	bd1 *last1,*new1,*ptr1;
+        1:   43:	new1=(bd1 *)malloc(sizeof(bd1));
+        1:   44:	fread(new1,sizeof(bd1),1,fp1);
+call    0 returned 1
+        4:   45:	while(!feof(fp1))
+call    0 returned 4
+branch  1 taken 3
+branch  2 taken 1 (fallthrough)
+        -:   46:	{
+        3:   47:		if(start1 == NULL)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        -:   48:		{
+        1:   49:			start1=last1=new1;
+        1:   50:			new1->next=NULL;
+        -:   51:		}
+        -:   52:		else
+        -:   53:		{
+        2:   54:			last1->next=new1;
+        2:   55:			last1=new1;
+        2:   56:			new1->next=NULL;
+        -:   57:		}
+        3:   58:		new1=(bd1 *)malloc(sizeof(bd1));
+        3:   59:		fread(new1,sizeof(bd1),1,fp1);
+call    0 returned 3
+        -:   60:
+        -:   61:	}
+        1:   62:	free(new1);
+        1:   63:	fclose(fp1);
+call    0 returned 1
+        1:   64:}
+        -:   65:
+        -:   66:
+        -:   67:/********************************************
+        -:   68: * *FUNCTION NAME : list_to_bowling 
+        -:   69: *
+        -:   70: * *DESCRIPTION   : This function is used to write bowling data into the file
+        -:   71: * 		    by traversing the list.
+        -:   72: *
+        -:   73: * *RETURNS       : 
+        -:   74: *
+        -:   75: *
+        -:   76: *
+        -:   77:*********************************************/
+        -:   78:
+function list_to_bowling called 1 returned 100% blocks executed 89%
+        1:   79:int list_to_bowling()
+        -:   80:{
+        -:   81:
+        -:   82:	FILE *fp1;
+        -:   83:	bd1 *new1, *ptr1, *prev1;
+        1:   84:	if((fp1=fopen("bowling","wb"))==NULL)
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+        -:   85:	{
+    #####:   86:		printf("Can't open bowling file");// optional
+call    0 never executed
+        -:   87:	}
+        -:   88:	
+        -:   89:
+        5:   90:	for(ptr1=(start1);(ptr1);ptr1=ptr1->next)
+branch  0 taken 4
+branch  1 taken 1 (fallthrough)
+        -:   91:	{
+        4:   92:		fwrite(ptr1,sizeof(bd1),1,fp1);
+call    0 returned 4
+        -:   93:	}
+        1:   94:	fclose(fp1);
+call    0 returned 1
+        -:   95:
+        1:   96:}

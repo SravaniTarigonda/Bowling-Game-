@@ -1,0 +1,13 @@
+bowler_file_handling.c: (in function bowler_to_list)
+bowler_file_handling.c:61:4: Variable last used before definition
+  An rvalue is used that may not be initialized to a value on some execution
+  path. (Use -usedef to inhibit warning)
+bowler_file_handling.c:61:4: Implicitly only storage last->next (type struct
+    bowler_database *) not released before assignment: last->next = new
+  A memory leak has been detected. Only-qualified storage is not released
+  before the last reference to it is lost. (Use -mustfreeonly to inhibit
+  warning)
+bowling_file_handling.c: (in function bowling_to_list)
+bowling_file_handling.c:59:4: Variable last1 used before definition
+bowling_file_handling.c:59:4: Implicitly only storage last1->next (type struct
+    bowling_database *) not released before assignment: last1->next = new1

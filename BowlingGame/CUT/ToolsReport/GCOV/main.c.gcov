@@ -1,0 +1,316 @@
+        -:    0:Source:main.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:/********************************************
+        -:    2: * *FILENAME	      : main.c
+        -:    3: *
+        -:    4: * *DESCRITION        : This file defines the functions that consists of various subfunctions 
+        -:    5: * 			to perform certain opertions. 
+        -:    6: *
+        -:    7: * Revision History   :	       
+        -:    8: *
+        -:    9: * 	Date			Name			Reason
+        -:   10: *
+        -:   11: * 27th Aug 2022		----			-----
+        -:   12: *
+        -:   13: *
+        -:   14:*********************************************/
+        -:   15:
+        -:   16:#include<stdio.h>
+        -:   17:#include<stdlib.h>
+        -:   18:#include "structure.h"
+        -:   19:
+        -:   20:#include "bowler_file_handling.c"
+        -:   21:#include "bowling_file_handling.c"
+        -:   22:#include "play_the_game_function.c"
+        -:   23:#include "show_report.c"
+        -:   24:#include "maintain_database_function.c"  
+        -:   25:#include <unistd.h>
+        -:   26:#include <pthread.h>
+        -:   27://bd *start;
+        -:   28:
+        -:   29:
+        -:   30:/********************************************************
+        -:   31: * *FUNCTION NAME : int main 
+        -:   32: *
+        -:   33: * *DESCRIPTION   : This function calls the other functions to performs various 
+        -:   34: * 		    operations by taking choice option from the user. 
+        -:   35: *
+        -:   36: * *RETURNS       : maintain_database function
+        -:   37: *		    play_the_game function
+        -:   38: *                  show_report function
+        -:   39: *                  exit - exit the main function
+        -:   40: *
+        -:   41:********************************************************/
+        -:   42:
+        -:   43:pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+        -:   44:
+function main called 1 returned 100% blocks executed 96%
+        1:   45:int main()
+        -:   46:{
+        -:   47:	pthread_t thread_id;
+        -:   48:
+        1:   49:	start = NULL;
+        1:   50:	start1 = NULL;
+        1:   51:	int choice=0;
+        1:   52:	bowler_to_list();
+call    0 returned 1
+        1:   53:	bowling_to_list();
+call    0 returned 1
+        7:   54:	while(choice!=4)
+branch  0 taken 6
+branch  1 taken 1 (fallthrough)
+        -:   55:	{
+        6:   56:		printf("-------The Bowling Game Begins---------\n");
+call    0 returned 6
+        6:   57:		printf("1. Maintain Bowler Database\n2.Play the game\n3.Show Report\n4.Exit\n");
+call    0 returned 6
+        6:   58:		printf("Enter Your Choice: \n");
+call    0 returned 6
+        6:   59:		scanf("%d",&choice);
+call    0 returned 6
+        6:   60:		switch(choice)
+branch  0 taken 2
+branch  1 taken 1
+branch  2 taken 2
+branch  3 taken 1
+branch  4 taken 0
+        -:   61:		{
+        2:   62:			case 1: maintain_database();break;
+call    0 returned 2
+        1:   63:			case 2: pthread_create(&thread_id,NULL,play_the_game,NULL);
+call    0 returned 1
+        1:   64:	    			pthread_join(thread_id,NULL);
+call    0 returned 1
+        -:   65:
+        -:   66:			       //	play_the_game();
+        -:   67:	
+        1:   68:				break; //play the game function here
+        -:   69:
+        2:   70:			case 3:show_reports();
+call    0 returned 2
+        2:   71:			       break;
+        1:   72:			case 4:break;
+    #####:   73:			default: printf("Invalid Choice!\n"); 
+call    0 never executed
+        -:   74:		}
+        -:   75:	}
+        1:   76:	if(start)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        -:   77:	{
+        1:   78:	list_to_bowler();
+call    0 returned 1
+        -:   79:	}
+        1:   80:	if(start1)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        -:   81:	{
+        1:   82:	list_to_bowling();
+call    0 returned 1
+        -:   83:	}
+        -:   84:	//pthread_mutex_destroy(&lock);
+        1:   85:	return 0;
+        -:   86:}
+        -:   87:
+        -:   88:/********************************************************
+        -:   89: * *FUNCTION NAME : int maintain_database 
+        -:   90: *
+        -:   91: * *DESCRIPTION   : This function is used to performs various operations of bowler
+        -:   92: * 		    database by taking choice option from the user.
+        -:   93: *
+        -:   94: * *RETURNS       : add_bowler    - adding bowler data
+        -:   95: * 		    edit_bowler   - editing bowler data
+        -:   96: * 		    delete_bolwer - deleting bowler data
+        -:   97: *		    view_bowler_information - view bowler data
+        -:   98: *
+        -:   99: *
+        -:  100:********************************************************/
+        -:  101:
+function maintain_database called 2 returned 100% blocks executed 88%
+        2:  102:int maintain_database()
+        -:  103:{
+        2:  104:	int choice1 = 0;
+        -:  105:
+        7:  106:	while(choice1!=5)
+branch  0 taken 7
+branch  1 taken 0 (fallthrough)
+        -:  107:	{
+        7:  108:		printf("1.Add Bowler\n2.Edit\n3.Delete\n4.view\n5.Back to the main Menu\n");
+call    0 returned 7
+        7:  109:		scanf("%d",&choice1);
+call    0 returned 7
+        7:  110:		switch(choice1)
+branch  0 taken 1
+branch  1 taken 1
+branch  2 taken 1
+branch  3 taken 2
+branch  4 taken 2
+branch  5 taken 0
+        -:  111:		{
+        1:  112:			case 1: add_bowler();break;//create/add function here
+call    0 returned 1
+        1:  113:			case 2: edit_information();break; // editing option here
+call    0 returned 1
+        1:  114:			case 3: delete_bowler();break; //Delete function here
+call    0 returned 1
+        2:  115:			case 4: view_bowler_information();break; //View function here
+call    0 returned 2
+        2:  116:			case 5: 
+        2:  117:				return 1;
+    #####:  118:			default: printf("Invalid Choice!");
+call    0 never executed
+        -:  119:		}
+        5:  120:		system("read a");
+call    0 returned 5
+        5:  121:		system("clear");
+call    0 returned 5
+        -:  122:	}
+    #####:  123:	return(0);
+        -:  124:}
+        -:  125:
+        -:  126:/********************************************************
+        -:  127: * *FUNCTION NAME : int show_reports 
+        -:  128: *
+        -:  129: * *DESCRIPTION   : This function is used to performs various operations of bowler
+        -:  130: * 		    datasheet and bowling day report by taking choice option from the user.
+        -:  131: *
+        -:  132: * *RETURNS       : Bowler_data_sheet  - shows bowler datasheet Report
+        -:  133: * 		    Bowling_day_report - shows bowling day report
+        -:  134: *
+        -:  135: *
+        -:  136:********************************************************/
+        -:  137:
+function show_reports called 2 returned 100% blocks executed 80%
+        2:  138:int show_reports()
+        -:  139:{
+        2:  140:	int choice2 = 0;
+        2:  141:	while(choice2!=3)
+branch  0 taken 2
+branch  1 taken 0 (fallthrough)
+        -:  142:	{
+        2:  143:		printf("1.Show Bowler data sheet\n2.Show Bowling day report\n3.Back to the main Menu\n");
+call    0 returned 2
+        2:  144:		scanf("%d",&choice2);
+call    0 returned 2
+        2:  145:		switch(choice2)
+branch  0 taken 1
+branch  1 taken 1
+branch  2 taken 0
+branch  3 taken 0
+        -:  146:		{
+        1:  147:			case 1: Bowler_data_sheet(); 
+call    0 returned 1
+        1:  148:				break; //Bowler_data_sheet report
+        1:  149:			case 2: Bowling_day_report();
+call    0 returned 1
+        1:  150:			       	break; //Bowling day report
+       2*:  151:			case 3:return 1; //Back to the main menu
+    #####:  152:			default: printf("Invalid Choice!");
+call    0 never executed
+        -:  153:		}
+        2:  154:		return 0;
+        -:  155:	}
+    #####:  156:}
+        -:  157:
+        -:  158:
+        -:  159:/********************************************************
+        -:  160: * *FUNCTION NAME : int play_the_game
+        -:  161: *
+        -:  162: * *DESCRIPTION   : This function is used to perform play the game function 
+        -:  163: * 		    by taking player id from the user.
+        -:  164: * 
+        -:  165: * *RETURNS       : 
+        -:  166: *
+        -:  167: *
+        -:  168: *
+        -:  169:********************************************************/
+        -:  170:
+function play_the_game called 1 returned 100% blocks executed 66%
+        1:  171:int play_the_game()
+        -:  172:{
+        -:  173:
+        -:  174:	char player_id[SIZE];
+        -:  175:	bd *ptr;
+        -:  176:	int id;
+        1:  177:        int wish_to_add_option = 0;	
+        -:  178:	while(1)
+    #####:  179:	{
+        1:  180:		printf("Enter the player id: \n");
+call    0 returned 1
+        1:  181:		scanf("%s",player_id); // validation should be done
+call    0 returned 1
+        1:  182:		int check=0;
+        1:  183:		if(strlen(player_id)>MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  184:		{
+    #####:  185:		  continue;
+        -:  186:		}
+        4:  187:		for(int i=0;player_id[i]!='\0';i++)
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+        -:  188:		{
+        3:  189:			if(!isdigit(player_id[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+        -:  190:			{
+    #####:  191:				check=1;
+        -:  192:			}
+        -:  193:		}
+        1:  194:		if(check==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  195:		{
+    #####:  196:			continue;
+        -:  197:		}
+        1:  198:		break;
+        -:  199:	}
+        1:  200:	id = atoi(player_id);
+        8:  201:	for(ptr=start;(ptr) && (ptr->bowler_id !=id);ptr=ptr->next);
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+branch  2 taken 7
+branch  3 taken 1 (fallthrough)
+        1:  202:        if(!ptr)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  203:	{
+    #####:  204:	  printf("Player id not found");		
+call    0 never executed
+    #####:  205:	   printf("Do you wish to add the player id? \n press 1 for yes else any other number\n");
+call    0 never executed
+    #####:  206:	   scanf("%d",&wish_to_add_option);
+call    0 never executed
+    #####:  207:		if(wish_to_add_option != 1)
+branch  0 never executed
+branch  1 never executed
+        -:  208:		{
+    #####:  209:			return(1);
+        -:  210:			}
+        -:  211:		else
+        -:  212:		{
+    #####:  213:		add_bowler();
+call    0 never executed
+    #####:  214:		play_the_game();
+call    0 never executed
+        -:  215:		}
+        -:  216:
+        -:  217:	}
+        -:  218:	else
+        -:  219:	{
+        1:  220:	   pthread_mutex_lock(&lock);
+call    0 returned 1
+        -:  221:	   
+        -:  222:
+        1:  223:	   play_the_game_function(id);
+call    0 returned 1
+        1:  224:	   pthread_mutex_unlock(&lock);
+call    0 returned 1
+        -:  225:	}	
+        -:  226:        
+        1:  227:	return (1);
+        -:  228:}
+        -:  229:
+        -:  230:

@@ -1,0 +1,476 @@
+        -:    0:Source:maintain_database_function.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include<stdio.h>
+        -:    2:#include<string.h>
+        -:    3:#include<stdlib.h>
+        -:    4:#include<ctype.h>
+        -:    5:#include "structure.h"
+        -:    6:
+        -:    7://all the other header files
+        -:    8:
+        -:    9:
+        -:   10://bd *new, *ptr, *prev;
+        -:   11://new=ptr=prev=NULL;
+        -:   12:
+function add_bowler called 1 returned 100% blocks executed 64%
+        1:   13:int add_bowler()
+        -:   14:{ //Add the bowler function 
+        -:   15:	//int num_check,check_id;
+        -:   16:	bd *new, *ptr, *prev;
+        -:   17://	char check;i
+        -:   18:	
+        1:   19:	new=(bd *)malloc(sizeof(bd));
+        1:   20:	printf("---Add the Bowler information here----\n");
+call    0 returned 1
+        -:   21:	while(1)
+    #####:   22:	{  // validation for bowler id starts from here
+        -:   23:	char check_id[SIZE];
+        -:   24:	//char check;
+        1:   25:		int flag =0;
+        1:   26:		printf("Enter the Bowler_id to add the bowler in tha database \n");
+call    0 returned 1
+        1:   27:		scanf("%s",check_id);
+call    0 returned 1
+        1:   28:		if(strlen(check_id) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   29:		{
+    #####:   30:		  printf("Bowler id should be less than 15 digits\n");	
+call    0 never executed
+    #####:   31:		  continue;
+        -:   32:		}
+        4:   33:		for(int i=0;check_id[i]!='\0';i++)
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+        -:   34:		{
+        3:   35:			if(!isdigit(check_id[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+        -:   36:			{
+    #####:   37:				flag=1;
+        -:   38:			
+        -:   39:			}
+        -:   40:		}
+        1:   41:		if(flag==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   42:		{
+    #####:   43:			continue;
+        -:   44:		}
+        -:   45:			
+        1:   46:		new->bowler_id = atoi(check_id);
+        9:   47:		for(ptr=(start);(ptr);ptr=ptr->next)
+branch  0 taken 8
+branch  1 taken 1 (fallthrough)
+        -:   48:		{
+        8:   49:			if(ptr->bowler_id == new->bowler_id)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 8
+        -:   50:			{
+    #####:   51:				printf("This bowler id  already exists! Try another one\n");
+call    0 never executed
+    #####:   52:				flag = 1;
+    #####:   53:				break;
+        -:   54:			}
+        -:   55:			
+        -:   56:		}
+        1:   57:		if(flag == 1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   58:		{
+    #####:   59:		   continue;
+        -:   60:		}
+        -:   61:		else
+        -:   62:		{
+        1:   63:		    break;
+        -:   64:		}
+        -:   65:	break;
+        -:   66:	
+        -:   67:	}
+        -:   68:
+        -:   69:	while(1)
+    #####:   70:	{  // validation for bowler name starts from here
+        1:   71:		printf("Enter the Bowler name: \n");
+call    0 returned 1
+        1:   72:		scanf("%s",new->bowler_name);
+call    0 returned 1
+        1:   73:		int length = strlen(new->bowler_name);
+        1:   74:                if(length>15)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   75:		{
+    #####:   76:		  printf("Bowler name should be less than 15 characters\n");
+call    0 never executed
+    #####:   77:		  continue;
+        -:   78:		}
+        1:   79:		if(length==0)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   80:		{ 
+    #####:   81:			printf("Bowler name field should not be empty\n");
+call    0 never executed
+    #####:   82:			continue;
+        -:   83:		}
+        1:   84:			int flag = 0;
+        6:   85:		for(int i=0;i<length;i++)
+branch  0 taken 5
+branch  1 taken 1 (fallthrough)
+        -:   86:		{
+        5:   87:			if(!isalpha(new->bowler_name[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+        -:   88:			{
+    #####:   89:				flag = 1;
+    #####:   90:				break;
+        -:   91:			}	
+        -:   92:		}
+        1:   93:		        if(flag == 1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   94:			{	
+    #####:   95:				printf("Enter alphabets only\n");
+call    0 never executed
+    #####:   96:			  	continue;
+        -:   97:			}
+        -:   98:			else
+        -:   99:			{
+        1:  100:				break;
+        -:  101:			}
+        -:  102:		break;
+        -:  103:	      
+        -:  104:	}
+        -:  105:
+        -:  106:
+        -:  107:	while(1)
+    #####:  108:	{	// validation for bowler year of experience starts from here
+        -:  109:		char check_exp[SIZE];
+        1:  110:                int flag = 0;
+        1:  111:		printf("Enter the Bowler_experience to add the bowler in tha database \n");
+call    0 returned 1
+        1:  112:		scanf("%s",check_exp);
+call    0 returned 1
+        1:  113:		if(strlen(check_exp) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  114:		{
+    #####:  115:		  continue;
+        -:  116:		}
+        2:  117:		for(int i=0;check_exp[i]!='\0';i++)
+branch  0 taken 1
+branch  1 taken 1 (fallthrough)
+        -:  118:		{
+        1:  119:			if(!isdigit(check_exp[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  120:			{
+    #####:  121:				flag=1;
+        -:  122:			
+        -:  123:			}
+        -:  124:		}
+        1:  125:		if(flag==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  126:		{
+    #####:  127:			printf("This field should have an integer value");
+call    0 never executed
+    #####:  128:			continue;
+        -:  129:		}
+        -:  130:			
+        1:  131:		new->bowler_experience = atoi(check_exp);
+        1:  132:		break;
+        -:  133:	}
+        -:  134:
+        -:  135:	while(1)
+    #####:  136:	{  // validation for no of tournaments won by the bowler starts from here
+        -:  137:		char check_win[SIZE];
+        1:  138:		printf("Enter the number of tournament won to add the bowler in tha database \n");
+call    0 returned 1
+        1:  139:		scanf("%s",check_win);
+call    0 returned 1
+        1:  140:	        if(strlen(check_win) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  141:		{
+    #####:  142:		  continue;
+        -:  143:		}
+        1:  144:		int flag=0;
+        2:  145:		for(int i=0;check_win[i]!='\0';i++)
+branch  0 taken 1
+branch  1 taken 1 (fallthrough)
+        -:  146:		{
+        1:  147:			if(!isdigit(check_win[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  148:			{
+    #####:  149:				flag=1;
+        -:  150:			
+        -:  151:			}
+        -:  152:		}
+        1:  153:		if(flag==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  154:		{
+    #####:  155:			printf("This field should have an integer value");
+call    0 never executed
+    #####:  156:			continue;
+        -:  157:		}
+        -:  158:			
+        1:  159:		new->no_of_tournaments_won = atoi(check_win);
+        1:  160:		break;
+        -:  161:	}
+        -:  162:
+        1:  163:	if(!start)
+branch  0 taken 0
+branch  1 taken 1
+        -:  164:	{
+    #####:  165:		start = new;
+    #####:  166:		new->next=NULL;
+        -:  167:	}
+        1:  168:	else if(new->bowler_id < start->bowler_id)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  169:	{
+    #####:  170:		new->next = start;
+    #####:  171:		start = new;
+        -:  172:	}
+        -:  173:	else
+        -:  174:	{
+        8:  175:		for(ptr=start; (ptr) && (ptr->bowler_id < new->bowler_id); prev = ptr, ptr = ptr->next);
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+branch  2 taken 7
+branch  3 taken 1 (fallthrough)
+        -:  176:		
+        1:  177:			prev->next=new;
+        1:  178:			new->next = ptr;
+        -:  179:		
+        -:  180:	}
+        -:  181:
+        1:  182:} //The add to bowler function ends here
+        -:  183:
+        -:  184:
+function edit_information called 1 returned 100% blocks executed 65%
+        1:  185:int edit_information()
+        -:  186:{ //Edit function starts here--
+        -:  187:	bd *new, *ptr, *prev;
+        1:  188:	if(!(start))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  189:	{
+    #####:  190:		printf("No record to edit\n");
+call    0 never executed
+    #####:  191:		return (0);
+        -:  192:	}
+        -:  193:	int check_id;
+        1:  194:	printf("Enter the bowler id: \n");
+call    0 returned 1
+        1:  195:	scanf("%d",&check_id);
+call    0 returned 1
+        8:  196:	for(ptr=(start);(ptr) && (ptr->bowler_id!=check_id);ptr=ptr->next);
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+branch  2 taken 7
+branch  3 taken 1 (fallthrough)
+        1:  197:	if(ptr==NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  198:	{
+    #####:  199:		printf("No such id exists\n");
+call    0 never executed
+    #####:  200:		return(0);
+        -:  201:	}
+        -:  202:	while(1)
+    #####:  203:	{
+        -:  204:		char check_name[SIZE];
+        1:  205:		printf("Enter the name of the bowler enter N to skip");
+call    0 returned 1
+        1:  206:		scanf("%s",check_name);
+call    0 returned 1
+        1:  207:		if(strlen(check_name) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  208:		{
+    #####:  209:		  continue;
+        -:  210:		}
+        1:  211:		if((strcmp(check_name,"N"))!=0)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  212:		{
+    #####:  213:			strcpy(ptr->bowler_name,check_name);
+        -:  214:		}
+        1:  215:		break;
+        -:  216:	}
+        -:  217:	while(1)
+    #####:  218:	{
+        -:  219:		char check_win[SIZE];
+        1:  220:		printf("Enter the number of tournaments won");
+call    0 returned 1
+        1:  221:		scanf("%s",check_win);
+call    0 returned 1
+        1:  222:		if(strlen(check_win) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  223:		{
+    #####:  224:		  continue;
+        -:  225:		}
+        1:  226:		int flag=0;
+        4:  227:		for(int i=0;check_win[i]!='\0';i++)
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+        -:  228:		{
+        3:  229:			if(!isdigit(check_win[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+        -:  230:			{
+    #####:  231:				flag=1;
+        -:  232:			
+        -:  233:			}
+        -:  234:		}
+        1:  235:		if(flag==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  236:		{
+    #####:  237:			printf("This field should have an integer value");
+call    0 never executed
+    #####:  238:			continue;
+        -:  239:		}
+        -:  240:			
+        1:  241:		ptr->no_of_tournaments_won = atoi(check_win);
+        1:  242:		break;
+        -:  243:	}
+        -:  244:	while(1)
+    #####:  245:	{
+        -:  246:		char check_exp[SIZE];
+        1:  247:		printf("Enter year of experience enter N if there is no change");
+call    0 returned 1
+        1:  248:		scanf("%s",check_exp);
+call    0 returned 1
+        1:  249: 		if(strlen(check_exp) > MAX)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  250:		{
+    #####:  251:		  continue;
+        -:  252:		}
+        1:  253:		int flag=0;
+        1:  254:		if(strcmp(check_exp,"N")==0)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  255:		{ //if there is no change skip this 
+    #####:  256:			break;
+        -:  257:		}
+        4:  258:		for(int i=0;check_exp[i]!='\0';i++)
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+        -:  259:		{
+        3:  260:			if(!isdigit(check_exp[i]))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+        -:  261:			{
+    #####:  262:				flag=1;
+        -:  263:			
+        -:  264:			}
+        -:  265:		}
+        1:  266:		if(flag==1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  267:		{
+    #####:  268:			printf("This field should have an integer value");
+call    0 never executed
+    #####:  269:			continue;
+        -:  270:		}
+        -:  271:			
+        1:  272:	 	ptr->bowler_experience = atoi(check_exp);
+        1:  273:		break;
+        -:  274:	}
+        1:  275:} //The edit function ends here
+        -:  276:
+        -:  277:
+        -:  278:
+        -:  279:
+function delete_bowler called 1 returned 100% blocks executed 67%
+        1:  280:int delete_bowler()
+        -:  281:{ //Delete function starts here
+        -:  282:	bd *new, *ptr, *prev;
+        1:  283:	if(!(start))
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  284:	{
+    #####:  285:		printf("Nothing to delete\n");
+call    0 never executed
+    #####:  286:		return (0);
+        -:  287:	}
+        -:  288:	int delete_id;
+        1:  289:	printf("Enter the Bowler id to delete the record");
+call    0 returned 1
+        1:  290:	scanf("%d",&delete_id);
+call    0 returned 1
+        1:  291:	if(delete_id==(start)->bowler_id)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  292:	{
+    #####:  293:		ptr=(start);
+    #####:  294:		(start)=(start)->next; //Moving start from first to second node and then free the ptr
+    #####:  295:		free(ptr);
+        -:  296:	}
+        -:  297:	else
+        -:  298:	{
+        8:  299:		for(ptr=(start);(ptr) && (ptr->bowler_id!=delete_id);prev=ptr,ptr=ptr->next);
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+branch  2 taken 7
+branch  3 taken 1 (fallthrough)
+        1:  300:		if(ptr==NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  301:		{
+    #####:  302:			printf("No such record found");
+call    0 never executed
+    #####:  303:			return(0);
+        -:  304:		}
+        1:  305:		prev->next=ptr->next;
+        1:  306:		free(ptr); //we can print the deleted node too
+        -:  307:	}
+        1:  308:} //Delete function ends here
+        -:  309:
+        -:  310:
+function view_bowler_information called 2 returned 100% blocks executed 89%
+        2:  311:int view_bowler_information()
+        -:  312:{
+        -:  313:	bd *new, *ptr, *prev;
+        2:  314:	if(!start)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+        -:  315:	{
+    #####:  316:		printf("No record to show\n");
+call    0 never executed
+       1*:  317:		return(0);
+        -:  318:	}
+        -:  319:	int show_id;
+        2:  320:	printf("Enter the Bowler id: \n");
+call    0 returned 2
+        2:  321:	scanf("%d", &show_id);
+call    0 returned 2
+       17:  322:	for(ptr=(start);(ptr) && ptr->bowler_id!=show_id;ptr=ptr->next);
+branch  0 taken 16 (fallthrough)
+branch  1 taken 1
+branch  2 taken 15
+branch  3 taken 1 (fallthrough)
+        2:  323:	if(ptr==NULL)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        -:  324:	{
+        1:  325:		printf("No such bowler id found\n");
+call    0 returned 1
+        1:  326:		return(0);
+        -:  327:	}
+        1:  328:	printf("Bowler id: %d\n",ptr->bowler_id);
+call    0 returned 1
+        1:  329:	printf("Bowler name: %s\n",ptr->bowler_name);
+call    0 returned 1
+        1:  330:	printf("Year of experience: %d\n",ptr->bowler_experience);
+call    0 returned 1
+        1:  331:	printf("Number of tournament won: %d\n",ptr->no_of_tournaments_won);
+call    0 returned 1
+        1:  332:}

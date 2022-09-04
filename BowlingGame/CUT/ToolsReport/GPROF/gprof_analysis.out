@@ -1,0 +1,96 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+ no time accumulated
+
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+  0.00      0.00     0.00       23     0.00     0.00  random_num
+  0.00      0.00     0.00       19     0.00     0.00  strike_condition
+  0.00      0.00     0.00        9     0.00     0.00  spare_condition
+  0.00      0.00     0.00        3     0.00     0.00  view_bowler_information
+  0.00      0.00     0.00        2     0.00     0.00  maintain_database
+  0.00      0.00     0.00        2     0.00     0.00  show_reports
+  0.00      0.00     0.00        1     0.00     0.00  Bowler_data_sheet
+  0.00      0.00     0.00        1     0.00     0.00  Bowling_day_report
+  0.00      0.00     0.00        1     0.00     0.00  add_bowler
+  0.00      0.00     0.00        1     0.00     0.00  bowler_to_list
+  0.00      0.00     0.00        1     0.00     0.00  bowling_to_list
+  0.00      0.00     0.00        1     0.00     0.00  delete_bowler
+  0.00      0.00     0.00        1     0.00     0.00  edit_information
+  0.00      0.00     0.00        1     0.00     0.00  list_to_bowler
+  0.00      0.00     0.00        1     0.00     0.00  list_to_bowling
+  0.00      0.00     0.00        1     0.00     0.00  play_the_game_function
+
+			Call graph
+
+
+granularity: each sample hit covers 2 byte(s) no time propagated
+
+index % time    self  children    called     name
+                0.00    0.00      23/23          play_the_game_function [16]
+[1]      0.0    0.00    0.00      23         random_num [1]
+-----------------------------------------------
+                0.00    0.00      19/19          play_the_game_function [16]
+[2]      0.0    0.00    0.00      19         strike_condition [2]
+-----------------------------------------------
+                0.00    0.00       9/9           play_the_game_function [16]
+[3]      0.0    0.00    0.00       9         spare_condition [3]
+-----------------------------------------------
+                0.00    0.00       3/3           maintain_database [5]
+[4]      0.0    0.00    0.00       3         view_bowler_information [4]
+-----------------------------------------------
+                0.00    0.00       2/2           main [23]
+[5]      0.0    0.00    0.00       2         maintain_database [5]
+                0.00    0.00       3/3           view_bowler_information [4]
+                0.00    0.00       1/1           edit_information [13]
+                0.00    0.00       1/1           add_bowler [9]
+                0.00    0.00       1/1           delete_bowler [12]
+-----------------------------------------------
+                0.00    0.00       2/2           main [23]
+[6]      0.0    0.00    0.00       2         show_reports [6]
+                0.00    0.00       1/1           Bowler_data_sheet [7]
+                0.00    0.00       1/1           Bowling_day_report [8]
+-----------------------------------------------
+                0.00    0.00       1/1           show_reports [6]
+[7]      0.0    0.00    0.00       1         Bowler_data_sheet [7]
+-----------------------------------------------
+                0.00    0.00       1/1           show_reports [6]
+[8]      0.0    0.00    0.00       1         Bowling_day_report [8]
+-----------------------------------------------
+                0.00    0.00       1/1           maintain_database [5]
+[9]      0.0    0.00    0.00       1         add_bowler [9]
+-----------------------------------------------
+                0.00    0.00       1/1           main [23]
+[10]     0.0    0.00    0.00       1         bowler_to_list [10]
+-----------------------------------------------
+                0.00    0.00       1/1           main [23]
+[11]     0.0    0.00    0.00       1         bowling_to_list [11]
+-----------------------------------------------
+                0.00    0.00       1/1           maintain_database [5]
+[12]     0.0    0.00    0.00       1         delete_bowler [12]
+-----------------------------------------------
+                0.00    0.00       1/1           maintain_database [5]
+[13]     0.0    0.00    0.00       1         edit_information [13]
+-----------------------------------------------
+                0.00    0.00       1/1           main [23]
+[14]     0.0    0.00    0.00       1         list_to_bowler [14]
+-----------------------------------------------
+                0.00    0.00       1/1           main [23]
+[15]     0.0    0.00    0.00       1         list_to_bowling [15]
+-----------------------------------------------
+                0.00    0.00       1/1           play_the_game [24]
+[16]     0.0    0.00    0.00       1         play_the_game_function [16]
+                0.00    0.00      23/23          random_num [1]
+                0.00    0.00      19/19          strike_condition [2]
+                0.00    0.00       9/9           spare_condition [3]
+-----------------------------------------------
+
+Index by function name
+
+   [7] Bowler_data_sheet      [13] edit_information        [6] show_reports
+   [8] Bowling_day_report     [14] list_to_bowler          [3] spare_condition
+   [9] add_bowler             [15] list_to_bowling         [2] strike_condition
+  [10] bowler_to_list          [5] maintain_database       [4] view_bowler_information
+  [11] bowling_to_list        [16] play_the_game_function
+  [12] delete_bowler           [1] random_num

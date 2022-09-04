@@ -1,0 +1,360 @@
+        -:    0:Source:play_the_game_function.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <time.h>
+        -:    4:#include "structure.h"
+        -:    5:#define FRAME_NUMBER 10
+        -:    6:
+function random_num called 26 returned 100% blocks executed 100%
+       26:    7:int random_num(){
+       26:    8:	int num = (rand()%(10-0+1))+0;
+call    0 returned 26
+       26:    9:	return num;
+        -:   10:}
+        -:   11:
+        -:   12:
+function strike_condition called 19 returned 100% blocks executed 100%
+       19:   13:int strike_condition(int balls, int current_score)
+        -:   14:{
+       19:   15:	if(balls == 1 && current_score == 10)
+branch  0 taken 10 (fallthrough)
+branch  1 taken 9
+branch  2 taken 1 (fallthrough)
+branch  3 taken 9
+        -:   16:        {
+        1:   17:	    return 1;
+        -:   18:	} 
+        -:   19:	else
+        -:   20:	{
+       18:   21:	    return 0;
+        -:   22:	}
+        -:   23:}
+        -:   24:
+function spare_condition called 9 returned 100% blocks executed 100%
+        9:   25:int spare_condition(int current_score, int previous_ball)
+        -:   26:{
+        9:   27:	if((current_score + previous_ball) == 10)
+branch  0 taken 2 (fallthrough)
+branch  1 taken 7
+        -:   28:	{
+        2:   29:	    return 1;
+        -:   30:	}
+        -:   31:	else
+        -:   32:	{
+        7:   33:	    return 0;
+        -:   34:	}
+        -:   35:}
+        -:   36:
+function extra_balls called 0 returned 0% blocks executed 0%
+    #####:   37:int extra_balls(int balls)
+        -:   38:{
+    #####:   39:  if(balls == 1)
+branch  0 never executed
+branch  1 never executed
+        -:   40:  {
+    #####:   41:    return 2;
+        -:   42:  }
+        -:   43:  else
+        -:   44:  {
+    #####:   45:    return 1;
+        -:   46:  }
+        -:   47:}
+        -:   48:
+        -:   49:
+function play_the_game_function called 1 returned 100% blocks executed 76%
+        1:   50:int play_the_game_function(int bowler_id){
+        1:   51:	int frame_number, balls, total_score = 0, random_number, current_score = 0;
+        1:   52:	int cumulative_score[FRAME_NUMBER]={0,0,0,0,0,0,0,0,0,0};
+        1:   53:	int strike[FRAME_NUMBER] = {0,0,0,0,0,0,0,0,0,0};
+        1:   54:	int strike_flag = 0;
+        1:   55:	int total_strikes = 0;
+        1:   56:	int total_spares = 0;
+        1:   57:	srand(time(0));
+call    0 returned 1
+call    1 returned 1
+        1:   58:	int count=0;
+        -:   59:
+       11:   60:	for(frame_number = 1; frame_number<=10; frame_number++)
+branch  0 taken 10
+branch  1 taken 1 (fallthrough)
+        -:   61:	{
+       10:   62:		printf("****************** FRAME NUMBER: %d ********************\n",frame_number);
+call    0 returned 10
+       26:   63:		for(balls = 1; balls <= 2; balls++)
+branch  0 taken 19
+branch  1 taken 7 (fallthrough)
+        -:   64:		{
+       19:   65:			current_score = random_num();
+call    0 returned 19
+       19:   66:			if(strike_condition(balls,current_score) == 1)
+call    0 returned 19
+branch  1 taken 1 (fallthrough)
+branch  2 taken 18
+        -:   67:			{
+        1:   68:				printf("Ball No. %d : Current score was: %d\n",balls, current_score);
+call    0 returned 1
+        1:   69:				total_strikes++;
+        1:   70:				printf("IT IS A STRIKE\n");
+call    0 returned 1
+        1:   71:				strike[frame_number-1] = 2;
+        1:   72:				cumulative_score[frame_number-1]+=current_score;
+        2:   73:				for(int j=0;j<frame_number-1;j++)
+branch  0 taken 1
+branch  1 taken 1 (fallthrough)
+        -:   74:				{
+        1:   75:					if(strike[j]>0)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        -:   76:					{
+        1:   77:						strike[j]--;
+        1:   78:						cumulative_score[j]+=current_score;
+        -:   79:					}
+        -:   80:				}
+        1:   81:				break;
+        -:   82:			}
+        -:   83:
+       18:   84:			if(balls == 2)
+branch  0 taken 9 (fallthrough)
+branch  1 taken 9
+        -:   85:			{
+        -:   86:		
+       16:   87:				while(current_score+cumulative_score[frame_number-1]>10)
+branch  0 taken 7
+branch  1 taken 9 (fallthrough)
+        -:   88:				{
+        7:   89:					current_score = random_num();
+call    0 returned 7
+        -:   90:				}
+        9:   91:				if(spare_condition(current_score, cumulative_score[frame_number-1]) == 1) 
+call    0 returned 9
+branch  1 taken 2 (fallthrough)
+branch  2 taken 7
+        -:   92:				{
+        2:   93:					strike[frame_number-1] = 1;
+        2:   94:					cumulative_score[frame_number-1]+=current_score;
+        2:   95:					printf("Ball No. %d: Current score was: %d\n", balls, current_score);
+call    0 returned 2
+        2:   96:					total_spares++;
+        2:   97:					printf("IT IS A SPARE\n");
+call    0 returned 2
+       10:   98:					for(int j=0;j<frame_number-1;j++)
+branch  0 taken 8
+branch  1 taken 2 (fallthrough)
+        -:   99:					{
+        8:  100:						if(strike[j]>0)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 8
+        -:  101:						{
+    #####:  102:							strike[j]--;
+    #####:  103:							cumulative_score[j]+=current_score;
+        -:  104:						}
+        -:  105:					}
+        2:  106:					break;
+        -:  107:				}
+        -:  108:			}
+       96:  109:			for(int j=0;j<frame_number-1;j++)
+branch  0 taken 80
+branch  1 taken 16 (fallthrough)
+        -:  110:			{
+       80:  111:				if(strike[j]>0)
+branch  0 taken 3 (fallthrough)
+branch  1 taken 77
+        -:  112:				{
+        3:  113:					strike[j]--;
+        3:  114:					cumulative_score[j]+=current_score;
+        -:  115:				}
+        -:  116:			}
+       16:  117:			printf("Ball No. %d: Current score was: %d\n", balls, current_score);
+call    0 returned 16
+        -:  118:		
+       16:  119:			cumulative_score[frame_number-1] += current_score;
+        -:  120:		}
+      10*:  121:if(frame_number == 10 && ((balls == 1 && current_score == 10) || (balls == 2 && cumulative_score[frame_number-1] == 10)))
+branch  0 taken 1 (fallthrough)
+branch  1 taken 9
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+branch  4 never executed
+branch  5 never executed
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+branch  8 never executed
+branch  9 never executed
+        -:  122:		{
+    #####:  123:			int extras = extra_balls(balls);
+call    0 never executed
+    #####:  124:			for(int balls=1; balls<=extras; balls++)
+branch  0 never executed
+branch  1 never executed
+        -:  125:			{
+    #####:  126:				current_score = random_num();
+call    0 never executed
+    #####:  127:				cumulative_score[frame_number-1]+=current_score;
+    #####:  128:				for(int j=0; j<frame_number-1; j++)
+branch  0 never executed
+branch  1 never executed
+        -:  129:				{
+    #####:  130:					if(strike[j]>0)
+branch  0 never executed
+branch  1 never executed
+        -:  131:					{
+    #####:  132:						strike[j]--;
+    #####:  133:						cumulative_score[frame_number-1] += current_score;
+        -:  134:					}
+        -:  135:				}
+    #####:  136:				printf("Extra Ball no : %d, Current score was: %d\n",balls,current_score);
+call    0 never executed
+        -:  137:			}
+        -:  138:		}
+        -:  139:
+        -:  140:
+        -:  141:	
+        -:  142:
+       10:  143:		printf("Current score for the frame: %d\n", cumulative_score[frame_number-1]);
+call    0 returned 10
+       10:  144:		printf("\n");
+call    0 returned 10
+        -:  145:	}
+       11:  146:	for(int j=0; j<10; j++)
+branch  0 taken 10
+branch  1 taken 1 (fallthrough)
+        -:  147:	{
+       10:  148:		printf("%d Frame score: %d\n",j+1,cumulative_score[j]);
+call    0 returned 10
+       10:  149:		total_score += cumulative_score[j];
+        -:  150:	}
+        1:  151:	printf("The total score of the game is %d\n",total_score);
+call    0 returned 1
+        1:  152:        printf("Total strikes of the game is %d\n", total_strikes);
+call    0 returned 1
+        1:  153:	printf("Total spares of the game is %d\n", total_spares);
+call    0 returned 1
+        -:  154:
+        -:  155:         
+        -:  156:
+        -:  157:	// bowler_id, commu_array , no of strikes , no of spares, total score
+        -:  158:       
+        -:  159:	bd1 *new1, *ptr1, *prev1;
+        1:  160:         int flag_won = 1;
+        2:  161:         for(ptr1=start1;(ptr1);ptr1 = ptr1->next)
+branch  0 taken 2
+branch  1 taken 0 (fallthrough)
+        -:  162:	 {
+        2:  163:	   if(total_score < ptr1->total_score)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        -:  164:	   {
+        1:  165:	     printf("\nNot won the tournament\n");
+call    0 returned 1
+        1:  166:	     flag_won = 0;
+        1:  167:	     break;
+        -:  168:	   }
+        -:  169:	   
+        -:  170:	 }
+        -:  171: 
+        1:  172:	 if(flag_won == 1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  173:	 {
+    #####:  174:	   printf("\n\n******CONGRATULATION YOU WON THE TOURNAMENT******\n\n");
+call    0 never executed
+        -:  175:
+        -:  176:	   bd *ptr;
+    #####:  177:	   for(ptr=start; (ptr->bowler_id != bowler_id); ptr=ptr->next);
+branch  0 never executed
+branch  1 never executed
+    #####:  178:	   ptr->no_of_tournaments_won += 1;
+    #####:  179:	   printf("Total number of tournaments you won till now is %d\n\n",ptr->no_of_tournaments_won);
+call    0 never executed
+        -:  180:	 }
+        -:  181:
+        -:  182:
+        1:  183:          new1 = (bd1 *) calloc (1,sizeof(bd1));
+        -:  184: 
+        1:  185:	  new1->bowler_id = bowler_id;
+        1:  186:	  new1->no_of_strikes = total_strikes;
+        1:  187:	  new1->no_of_spares = total_spares;
+        1:  188:	  new1->total_score = total_score;
+        -:  189:
+       11:  190:	  for(int i = 0; i<10; i++)
+branch  0 taken 10
+branch  1 taken 1 (fallthrough)
+        -:  191:	  {
+       10:  192:	     new1->frame_and_cumulative_score[0][i] = cumulative_score[i];
+       10:  193:	     if(i==0)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 9
+        -:  194:	     {
+        1:  195:	         new1->frame_and_cumulative_score[1][i] = cumulative_score[i]; 
+        -:  196:	     }
+        -:  197:	     else
+        -:  198:	     {
+        9:  199:	       new1->frame_and_cumulative_score[1][i] =  new1->frame_and_cumulative_score[1][i-1] + cumulative_score[i];  
+        -:  200:	     }
+        -:  201:	  }
+        -:  202: 
+        4:  203:	 for(ptr1=start1;(ptr1) && (ptr1->bowler_id != new1->bowler_id);  ptr1 = ptr1->next);
+branch  0 taken 3 (fallthrough)
+branch  1 taken 1
+branch  2 taken 3
+branch  3 taken 0 (fallthrough)
+        1:  204:	 if(ptr1)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  205:	 {
+    #####:  206:		 ptr1->bowler_id = new1->bowler_id;
+    #####:  207:		 ptr1->no_of_strikes = new1->no_of_strikes;
+    #####:  208:		 ptr1->no_of_spares = new1->no_of_spares;
+    #####:  209:		 ptr1->total_score = new1->total_score;
+    #####:  210:		 for(int i= 0;i<10; i++)
+branch  0 never executed
+branch  1 never executed
+        -:  211:		 {
+    #####:  212:			  ptr1->frame_and_cumulative_score[0][i] = new1->frame_and_cumulative_score[0][i];
+    #####:  213:			  ptr1->frame_and_cumulative_score[1][i] = new1->frame_and_cumulative_score[1][i];  
+        -:  214:		 }
+        -:  215:
+        -:  216:	 }
+        -:  217:	 else
+        -:  218:	 {
+        1:  219:		 if(start1==NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  220:		 {
+    #####:  221:			 start1 = new1;
+    #####:  222:			 new1->next=NULL;
+        -:  223:		 }
+        -:  224:
+        1:  225:		 else if(new1->bowler_id < start1->bowler_id)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  226:		 {
+    #####:  227:			 new1->next = start1;
+    #####:  228:			 start1 = new1;
+        -:  229:		 }
+        -:  230:		 else
+        -:  231:		 {
+        -:  232:
+        3:  233:			 for(ptr1=start1; (ptr1) && (ptr1->bowler_id <= new1->bowler_id); prev1 = ptr1, ptr1 = ptr1->next);
+branch  0 taken 3 (fallthrough)
+branch  1 taken 0
+branch  2 taken 2
+branch  3 taken 1 (fallthrough)
+        -:  234:
+        1:  235:			 prev1->next=new1;
+        1:  236:			 new1->next = ptr1;
+        -:  237:
+        -:  238:		 }
+        -:  239:
+        -:  240:
+        -:  241:	 }
+        -:  242:
+        -:  243:   
+        -:  244:	  
+        1:  245:	return 0;
+        -:  246:}
+        -:  247:
+        -:  248:
